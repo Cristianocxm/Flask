@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Cargo</title>
+</head>
+<body>
+    <h1>Cadastro de Cargo</h1>
+    <form action="/cadastrar_cargo" method="post">
+        <label for="nome">Nome do Cargo:</label>
+        <input type="text" name="nome" required>
+
+        <label for="id_setor">Setor:</label>
+        <select name="id_setor" required>
+            {% for setor in setores %}
+            <option value="{{ setor.id }}">{{ setor.nome }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="submit" value="Cadastrar">
+        <button type="button" onclick="history.back()">Voltar</button>
+    </form>
+    
+</body>
+</html>
