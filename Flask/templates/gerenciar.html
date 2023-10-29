@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/style.css">
+    <title>Gerenciar Cadastros</title>
+</head>
+<body>
+    <h1>Gerenciar Cadastros</h1>
+    <a href="/setores"><button class="btn">Gerenciar setores</button></a>
+    <a href="/cargos"><button class="btn">Gerenciar Cargos</button></a>
+    <a href="/funcionarios"><button class="btn">Gerenciar Funcionários</button></a>
+    <a href="/"><button class="btn">Home</button></a>
+
+     <!-- Tabela de Setores -->
+     {% if tipo == 'setores' %}
+     <table>
+         <thead>
+             <tr>
+                 <th>Setores cadastrados</th>
+             </tr>
+         </thead>
+         <tbody>
+             {% for setor in dados %}
+             <tr>
+                 <td>{{ setor.nome }}</td>
+             </tr>
+             {% endfor %}
+         </tbody>
+     </table>
+     {% endif %}
+ 
+     <!-- Tabela de Cargos -->
+     {% if tipo == 'cargos' %}
+     <table>
+        <thead>
+            <tr>
+                <th>Cargos cadastrados</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cargo in dados %}
+            <tr>
+                <td>{{ cargo.nome }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+     </table>
+     {% endif %}
+ 
+     <!-- Tabela de Funcionários -->
+     {% if tipo == 'funcionarios' %}
+     <table>
+        <thead>
+            <tr>
+                <th>Primeiro Nome</th>
+                <th>Sobrenome</th>
+                <th>Data de admissão</th>
+                <th>Status</th>
+                <th>Setor</th>
+                <th>Cargo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for funcionarios  in dados %}
+            <tr>
+                <td>{{ funcionarios.primeiro_nome }}</td>
+                <td>{{ funcionarios.sobrenome }}</td>
+                <td>{{ funcionarios.data_admissao }}</td>
+                <td>{{ funcionarios.status_funcionario }}</td>
+                <td>{{ funcionarios.id_setor }}</td>
+                <td>{{ funcionarios.id_cargo }}</td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+     </table>
+     {% endif %}
+</body>
+</html>

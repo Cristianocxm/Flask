@@ -1,0 +1,87 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    text-align: center;
+}
+
+h1 {
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px;
+}
+
+a {
+    text-decoration: none;
+}
+
+table {
+    font-family: Arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+form {
+    background-color: white;
+    border: 1px solid #dddddd;
+    padding: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+    border-radius: 5px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type="text"], [type="date"], select {
+    width: 95%;
+    padding: 10px; /* Adiciona mais preenchimento (padding) para o lado direito */
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+input[type="radio"] {
+    padding: 15px;
+    margin-right: 5px;
+    margin-bottom: 20px;
+}
+
+
+.btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn{
+    background-color: #333;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+.opt-vz {
+    font-style: italic;
+}

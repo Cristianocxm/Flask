@@ -40,6 +40,21 @@ def verifica_e_cria_tabelas():
                 print(f"A tabela '{tabela}' já existe.")
 
 
+def obter_dados_do_banco_de_dados(tabela):
+    try:
+        if tabela == 'cargo':
+            cargos = Cargo.query.all()
+            return cargos
+        elif tabela == 'setor':
+            setores = Setor.query.all()
+            return setores
+        elif tabela == 'funcionario':
+            funcionarios = Funcionario.query.all()
+            return funcionarios
+    except Exception as e:
+        print(f"Erro ao obter cargos do banco de dados: {str(e)}")
+        return []
+        
 
 @app.route('/')
 def index():
@@ -117,6 +132,26 @@ def cadastrar_funcionario():
 def sucesso():
     mensagem = request.args.get('mensagem')
     return render_template('sucesso.html', mensagem=mensagem)
+
+@app.route('/gerenciar_cadastros')
+def gerenciar_cadastros():
+    return render_template('gerenciar.html')
+
+
+@app.route('/setores')
+def setores():
+    setores = obter_dados_do_banco_de_dados('setor')  # Substitua com sua lógica para obter os setores
+    return render_template('gerenciar.html', tipo='setores', dados=setores)
+
+@app.route('/cargos')
+def cargos():
+    cargos = obter_dados_do_banco_de_dados('cargo')  # Substitua com sua lógica para obter os cargos
+    return render_template('gerenciar.html', tipo='cargos', dados=cargos)
+
+@app.route('/funcionarios')
+def funcionarios():
+    funcionarios = obter_dados_do_banco_de_dados('funcionario')  # Substitua com sua lógica para obter os funcionários
+    return render_template('gerenciar.html', tipo='funcionarios', dados=funcionarios)
 
 if __name__ == '__main__':
     verifica_e_cria_tabelas()
