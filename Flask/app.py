@@ -23,9 +23,11 @@ class Funcionario(db.Model):
     status_funcionario = db.Column(db.Boolean, nullable=False)
     id_setor = db.Column(db.Integer, db.ForeignKey('setor.id'), nullable=False)
     id_cargo = db.Column(db.Integer, db.ForeignKey('cargo.id'), nullable=False)
+    setor = db.relationship('Setor', backref='funcionarios')
+    cargo = db.relationship('Cargo', backref='funcionarios')
 
 
-def verifica_e_cria_tabelas():
+def verifica_e_cria_tabelas(): #Função que verifica se as tabelas existem no banco e criá-las caso contrário.
     with app.app_context():
         inspector = inspect(db.engine)
         tabelas_existentes = inspector.get_table_names()
@@ -40,7 +42,7 @@ def verifica_e_cria_tabelas():
                 print(f"A tabela '{tabela}' já existe.")
 
 
-def obter_dados_do_banco_de_dados(tabela):
+def obter_dados_do_banco_de_dados(tabela): #Função para retornar os dados da base de acordo com o parâmetro passado (setor, cargo, funcionario)
     try:
         if tabela == 'cargo':
             cargos = Cargo.query.all()
@@ -52,16 +54,16 @@ def obter_dados_do_banco_de_dados(tabela):
             funcionarios = Funcionario.query.all()
             return funcionarios
     except Exception as e:
-        print(f"Erro ao obter cargos do banco de dados: {str(e)}")
+        print(f"Erro ao obter os dados da tabela {tabela} do banco de dados: {str(e)}")
         return []
         
 
-@app.route('/')
+@app.route('/') #Rota página inicial
 def index():
     return render_template('index.html')
 
 
-@app.route('/cadastrar_setor', methods=['GET', 'POST'])
+@app.route('/cadastrar_setor', methods=['GET', 'POST']) #Rota para cadastrar os setores
 def cadastrar_setor():
     if request.method == 'POST':
         nome = request.form['nome']
@@ -76,7 +78,7 @@ def cadastrar_setor():
     return render_template('setor.html')
 
 
-@app.route('/cadastrar_cargo', methods=['GET', 'POST'])
+@app.route('/cadastrar_cargo', methods=['GET', 'POST']) #Rota para cadastrar os cargos
 def cadastrar_cargo():
     if request.method == 'POST':
         nome = request.form['nome']
@@ -95,7 +97,7 @@ def cadastrar_cargo():
 
 
 
-@app.route('/cadastrar_funcionario', methods=['GET', 'POST'])
+@app.route('/cadastrar_funcionario', methods=['GET', 'POST']) #Rota para cadastrar os funcionários
 def cadastrar_funcionario():
     if request.method == 'POST':
         primeiro_nome = request.form['primeiro_nome']
@@ -128,7 +130,7 @@ def cadastrar_funcionario():
     cargos = Cargo.query.all()
     return render_template('funcionario.html', setores=setores, cargos=cargos)
 
-@app.route('/sucesso')
+@app.route('/sucesso') #Rota para a mensagem de sucesso
 def sucesso():
     mensagem = request.args.get('mensagem')
     return render_template('sucesso.html', mensagem=mensagem)
@@ -138,19 +140,19 @@ def gerenciar_cadastros():
     return render_template('gerenciar.html')
 
 
-@app.route('/setores')
+@app.route('/setores') #Rota para gerenciar os setores na página "gerenciar"
 def setores():
-    setores = obter_dados_do_banco_de_dados('setor')  # Substitua com sua lógica para obter os setores
+    setores = obter_dados_do_banco_de_dados('setor')
     return render_template('gerenciar.html', tipo='setores', dados=setores)
 
-@app.route('/cargos')
+@app.route('/cargos') #Rota para gerenciar os caargos na página "gerenciar"
 def cargos():
-    cargos = obter_dados_do_banco_de_dados('cargo')  # Substitua com sua lógica para obter os cargos
+    cargos = obter_dados_do_banco_de_dados('cargo')
     return render_template('gerenciar.html', tipo='cargos', dados=cargos)
 
-@app.route('/funcionarios')
+@app.route('/funcionarios') #Rota para gerenciar os funcionarios na página "gerenciar"
 def funcionarios():
-    funcionarios = obter_dados_do_banco_de_dados('funcionario')  # Substitua com sua lógica para obter os funcionários
+    funcionarios = obter_dados_do_banco_de_dados('funcionario')  
     return render_template('gerenciar.html', tipo='funcionarios', dados=funcionarios)
 
 if __name__ == '__main__':

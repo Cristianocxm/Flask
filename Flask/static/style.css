@@ -4,10 +4,26 @@ body {
     text-align: center;
 }
 
+.cont-sucess {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
 h1 {
     background-color: #4CAF50;
     color: white;
     padding: 20px;
+    border-radius: 15px;
+}
+
+p {
+    background-color: #4caf4fbe;
+
+    padding: 100px; /* Aumenta a área ao redor do <p> */
+    border-radius: 15px;
 }
 
 a {
@@ -65,7 +81,7 @@ input[type="radio"] {
 
 
 .btn {
-    background-color: #4CAF50;
+    background-color: #333;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -84,4 +100,34 @@ input[type="radio"] {
 
 .opt-vz {
     font-style: italic;
+}
+
+.btn-edt {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn-exc {
+    background-color: #fc0505;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn-edt:hover {
+    background-color: rgba(5, 90, 248, 0.39)
+    
+}
+
+.btn-exc:hover {
+    background-color: #fc05056b;
+    
 }

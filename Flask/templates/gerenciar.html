@@ -9,8 +9,8 @@
 <body>
     <h1>Gerenciar Cadastros</h1>
     <a href="/setores"><button class="btn">Gerenciar setores</button></a>
-    <a href="/cargos"><button class="btn">Gerenciar Cargos</button></a>
-    <a href="/funcionarios"><button class="btn">Gerenciar Funcionários</button></a>
+    <a href="/cargos"><button class="btn">Gerenciar cargos</button></a>
+    <a href="/funcionarios"><button class="btn">Gerenciar funcionários</button></a>
     <a href="/"><button class="btn">Home</button></a>
 
      <!-- Tabela de Setores -->
@@ -18,13 +18,18 @@
      <table>
          <thead>
              <tr>
-                 <th>Setores cadastrados</th>
+                <th>Setores cadastrados</th>
+                <th>Editar</th>
+                <th>Excluir</th>
+                
              </tr>
          </thead>
          <tbody>
              {% for setor in dados %}
              <tr>
-                 <td>{{ setor.nome }}</td>
+                <td>{{ setor.nome }}</td>
+                <td><a href="/editar/setor/{{ setor.id }}"><button class="btn-edt">Editar</button></a></td>
+                <td><a href="/excluir/setor/{{ setor.id }}"><button class="btn-exc">Excluir</button></a></td>
              </tr>
              {% endfor %}
          </tbody>
@@ -37,12 +42,16 @@
         <thead>
             <tr>
                 <th>Cargos cadastrados</th>
+                <th>Editar</th>
+                <th>Excluir</th>
             </tr>
         </thead>
         <tbody>
             {% for cargo in dados %}
             <tr>
                 <td>{{ cargo.nome }}</td>
+                <td><a href="/editar/cargo/{{ cargo.id }}"><button class="btn-edt">Editar</button></a></td>
+                <td><a href="/excluir/cargo/{{ cargo.id }}"><button class="btn-exc">Excluir</button></a></td>
             </tr>
             {% endfor %}
         </tbody>
@@ -60,6 +69,8 @@
                 <th>Status</th>
                 <th>Setor</th>
                 <th>Cargo</th>
+                <th>Editar</th>
+                <th>Excluir</th>
             </tr>
         </thead>
         <tbody>
@@ -68,14 +79,30 @@
                 <td>{{ funcionarios.primeiro_nome }}</td>
                 <td>{{ funcionarios.sobrenome }}</td>
                 <td>{{ funcionarios.data_admissao }}</td>
-                <td>{{ funcionarios.status_funcionario }}</td>
-                <td>{{ funcionarios.id_setor }}</td>
-                <td>{{ funcionarios.id_cargo }}</td>
+                <td id="status-celula">{{ funcionarios.status_funcionario }}</td>
+                <td>{{ funcionarios.setor.nome }}</td>
+                <td>{{ funcionarios.cargo.nome }}</td>
+                <td><a href="/editar/funcionario/{{ funcionarios.id }}"><button class="btn-edt">Editar</button></a></td>
+                <td><a href="/excluir/funcionario/{{ funcionarios.id }}"><button class="btn-exc">Excluir</button></a></td>
 
             </tr>
             {% endfor %}
         </tbody>
      </table>
      {% endif %}
+
+<script>
+    var statusCelula = document.getElementById('status-celula');
+    var status = statusCelula.textContent.trim(); // Remove espaços em branco extras
+
+    if (status.toLowerCase() === 'true') {
+        statusCelula.textContent  = 'Ativo'
+    } else if (status.toLowerCase() === 'false') {
+        statusCelula.textContent  = 'Inativo'
+    } else {
+        console.log('O valor não é True nem False');
+    }
+    
+</script>
 </body>
 </html>
